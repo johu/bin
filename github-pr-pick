@@ -23,4 +23,4 @@ fi
 pushd "${SOURCES}/${REPO}" > /dev/null
 echo "$(pwd)"
 curl -s -L "https://github.com/gentoo/${REPO}/pull/${PR}.patch" | git am -s -S
-popd > /dev/null 
+popd > /dev/null

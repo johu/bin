@@ -1,0 +1,5 @@
+#!/bin/sh
+sleep 5
+mount /mnt/usb
+rsync -h -r -t --delete --progress ~/Musik/ /mnt/usb
+umount /mnt/usb

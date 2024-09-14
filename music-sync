@@ -1,0 +1,14 @@
+#!/bin/sh
+sleep 5
+if [ $(mount | grep -c /mnt/usb) != 1 ]; then
+  echo "USB stick is not mounted - trying to mount..."
+  mount /mnt/usb
+  if [ $(mount | grep -c /mnt/usb) != 1 ]; then
+    echo "USB stick still not mounted, quitting"
+    exit 1
+  fi
+  echo "USB stick mounted on /mnt/usb"
+fi
+rsync -h -r -t --delete --progress ~/Musik/ /mnt/usb
+echo "umount /mnt/usb"
+umount /mnt/usb
