@@ -1,11 +1,12 @@
 #!/bin/sh
-[ "$1" == "" ] && {
+
+[ "$1" = "" ] && {
   echo usage: cdrip \<dir\> >&2
   exit 1
 }
 
-mkdir -p $1
-cd $1
+mkdir -p "$1"
+cd "$1" || exit
 
 # regular
 cdparanoia -B
@@ -15,7 +16,7 @@ cdparanoia -B
 
 for i in *.wav; do
   # 320 kbit/s
-  ffmpeg -i $i -c:a libmp3lame -b:a 320k $i.mp3
+  ffmpeg -i "$i" -c:a libmp3lame -b:a 320k "$i.mp3"
 
   # variable bitrate
   # ffmpeg -i $i -c:a libmp3lame -qscale:a 2 $i.mp3

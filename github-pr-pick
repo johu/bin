@@ -5,22 +5,22 @@ REPO="$1"
 PR="$2"
 
 help() {
-	echo "Usage: github-pr-pick.sh REPO PR"
-	echo "Example: github-pr-pick.sh kde 1337"
-	exit 0
+  echo "Usage: github-pr-pick.sh REPO PR"
+  echo "Example: github-pr-pick.sh kde 1337"
+  exit 0
 }
 
-if [[ $1 == "--help" ]] ; then
-	help
+if [[ $1 == "--help" ]]; then
+  help
 fi
 
-if [[ -z "${REPO}" || -z "${PR}" ]] ; then
-	echo ERROR: Not enough arguments
-	echo
-	help
+if [[ -z "${REPO}" || -z "${PR}" ]]; then
+  echo ERROR: Not enough arguments
+  echo
+  help
 fi
 
-pushd "${SOURCES}/${REPO}" > /dev/null
-echo "$(pwd)"
+pushd "${SOURCES}/${REPO}" >/dev/null || exit
+pwd
 curl -s -L "https://github.com/gentoo/${REPO}/pull/${PR}.patch" | git am -s -S
-popd > /dev/null
+popd >/dev/null || exit
